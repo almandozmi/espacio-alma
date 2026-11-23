@@ -1,0 +1,10 @@
+# Global
+*.log
+.DS_Store
+.idea/
+.vscode/
+
+# Local Environment
+.env
+.env.*
+!.env.example
