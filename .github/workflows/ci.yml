@@ -29,3 +29,14 @@ jobs:
       # shortcut: skipped while site/ has no pages, remove this condition in PR 1
       - if: hashFiles('site/**/*.html') != ''
         run: docker run --rm -v "$PWD/site:/site:ro" ghcr.io/validator/validator:latest@sha256:f10441aee7dcea043d2153b0a8bbce13dafeafc8a3680b69b88b83ba5b9880f5 java -jar /vnu.jar --skip-non-html /site
+
+  semgrep:
+    runs-on: ubuntu-latest
+    container:
+      # shortcut: Dependabot doesn't bump image digests, update it by hand on new Semgrep releases
+      image: semgrep/semgrep:1.186.0@sha256:6e1b04340e60e910fbb4ddbf3c857ab0918f064417ad5ac530014ccb3cf8c8f1
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: semgrep scan --config p/default --error --metrics off
