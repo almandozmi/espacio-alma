@@ -21,7 +21,30 @@
   <link rel="preload" href="/fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/nunito-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
+  <header class="site-header" data-transparent="true">
+    <div class="site-header__bar">
+      <a class="site-header__logo" href="/">
+        <img src="/images/logos/espacio-alma-logo-horizontal-white.svg" alt="Espacio Alma Pilates, ir al inicio" width="851" height="195">
+      </a>
+      <nav id="main-menu" class="site-header__nav" data-open="false" aria-label="Principal">
+        <ul>
+          <li><a href="#quienes-somos">¿Quiénes somos?</a></li>
+          <li><a href="#horarios">Horarios</a></li>
+          <li><a href="#valores">Valores</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="site-header__actions">
+        <a class="button button--small" href="https://agendapro.com/site/cl/pilatesdemariacarolinajimenez/584762?hide_nearby=true" target="_blank" rel="noopener noreferrer">Agendar</a>
+        <button type="button" class="site-header__menu-button" aria-expanded="false" aria-controls="main-menu" aria-label="Abrir menú">
+          <!-- Lucide "menu" icon (ISC license) -->
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
 </body>
 </html>
