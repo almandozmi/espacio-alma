@@ -1,0 +1,247 @@
+/* shortcut: latin subset only (all the site's Spanish text), add latin-ext if a name needs it */
+@font-face {
+  font-family: "Jost";
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/jost-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  font-weight: 200 1000;
+  font-display: swap;
+  src: url("../fonts/nunito-sans-latin.woff2") format("woff2");
+}
+
+/* Arial resized to the web fonts' metrics, so text doesn't jump when they swap in */
+@font-face {
+  font-family: "Jost Fallback";
+  src: local("Arial");
+  ascent-override: 111.45%;
+  descent-override: 39.06%;
+  line-gap-override: 0%;
+  size-adjust: 96.01%;
+}
+
+@font-face {
+  font-family: "Nunito Sans Fallback";
+  src: local("Arial");
+  ascent-override: 99.71%;
+  descent-override: 34.82%;
+  line-gap-override: 0%;
+  size-adjust: 101.39%;
+}
+
+:root {
+  color-scheme: dark;
+
+  --color-white: #ffffff;
+  --color-silver: #c0c0c0;
+  --color-charcoal: #231f20;
+  --color-whatsapp: #17924a;
+  --color-instagram: #d62976;
+  /* 5:1 contrast on the light gray cards */
+  --color-error: #a3221b;
+
+  --bg: #0b0b0b;
+  --bg-alt: #171717;
+  --surface: #d9d9d9;
+  --on-surface: #0b0b0b;
+  --on-surface-muted: #4a4a4a;
+  --text: #ffffff;
+  --text-muted: #a8a8a8;
+  --line: #2c2c2c;
+  --accent: #d9d9d9;
+  --accent-hover: #ffffff;
+  --on-accent: #0b0b0b;
+  --footer-bg: var(--bg-alt);
+  --header-glass: rgb(11 11 11 / 0.72);
+  --header-glass-border: rgb(255 255 255 / 0.08);
+  --header-menu: rgb(11 11 11 / 0.96);
+  --header-hover: rgb(255 255 255 / 0.12);
+  --header-press: rgb(255 255 255 / 0.16);
+
+  --font-heading: "Jost", "Jost Fallback", sans-serif;
+  --font-body: "Nunito Sans", "Nunito Sans Fallback", system-ui, sans-serif;
+  --tracking-title: 0.2em;
+  --tracking-label: 0.15em;
+
+  --max-width: 1120px;
+  --gutter: 16px;
+  --section-space: 44px;
+  --radius: 20px;
+  --header-height: 64px;
+  /* Shared by the header and the hero text so the logo, headline and button line up */
+  --page-edge: 24px;
+
+  --transition: 160ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  @media (min-width: 768px) {
+    --gutter: 32px;
+    --section-space: 80px;
+    --header-height: 80px;
+    --page-edge: clamp(48px, 6.5vw, 128px);
+    --tracking-title: 0.3em;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-height) + env(safe-area-inset-top, 0px));
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+::selection {
+  background: var(--text);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.container {
+  width: 100%;
+  max-width: calc(var(--max-width) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px));
+}
+
+.section {
+  padding-block: var(--section-space);
+  /* Lands the title right under the header when jumping from the menu */
+  scroll-margin-top: calc(24px - var(--section-space));
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 1.2rem + 2vw, 2.4rem);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-title);
+  /* Offsets the trailing letter spacing so the title stays centered */
+  padding-inline-start: var(--tracking-title);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.subtitle {
+  margin-top: 16px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 36px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform var(--transition), background-color var(--transition);
+
+  &:active:not([aria-disabled="true"]) {
+    transform: scale(0.97);
+  }
+
+  &[aria-disabled="true"] {
+    cursor: default;
+  }
+
+  &:focus-visible {
+    outline-offset: 4px;
+    border-radius: 999px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:not([aria-disabled="true"]):hover {
+      background: var(--accent-hover);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}

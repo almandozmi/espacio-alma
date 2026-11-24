@@ -1,0 +1,169 @@
+.site-footer {
+  padding: 48px 0 calc(24px + env(safe-area-inset-bottom, 0px));
+  background: var(--footer-bg);
+  color: var(--color-white);
+
+  & :focus-visible {
+    outline-color: var(--color-white);
+  }
+}
+
+.site-footer__body {
+  display: grid;
+  gap: 40px;
+}
+
+.site-footer__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.site-footer__logo {
+  width: 120px;
+
+  & + h2 + .site-footer__item {
+    margin-top: 28px;
+  }
+}
+
+.site-footer__item {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+  font-style: normal;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+
+  & svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--color-silver);
+  }
+}
+
+.site-footer__landmark {
+  color: var(--color-silver);
+}
+
+.site-footer__buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+/* Large bold text (over 18.6px), so the WhatsApp green meets AA contrast for large text */
+.site-footer__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px;
+  border-radius: 12px;
+  color: var(--color-white);
+  font-size: 1.17rem;
+  font-weight: 700;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: filter var(--transition), transform var(--transition);
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.site-footer__button--whatsapp {
+  background: var(--color-whatsapp);
+}
+
+.site-footer__button--instagram {
+  background: var(--color-instagram);
+}
+
+.site-footer__map {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 0;
+  border-radius: 16px;
+  background: rgb(255 255 255 / 0.06);
+}
+
+.site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgb(255 255 255 / 0.15);
+  font-size: 0.9rem;
+  color: var(--color-silver);
+
+  & a {
+    color: var(--color-white);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-footer__button:hover {
+    filter: brightness(1.08);
+  }
+
+  a.site-footer__item:hover span {
+    text-decoration: underline;
+  }
+}
+
+@media (min-width: 768px) {
+  .site-footer {
+    padding: 72px 0 calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* The map stretches to the full height of the details, so no empty space is left under them */
+  .site-footer__body {
+    grid-template-columns: auto 1fr;
+    gap: 56px;
+    align-items: stretch;
+  }
+
+  .site-footer__map {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 420px;
+  }
+
+  .site-footer__info {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .site-footer__item {
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .site-footer__bottom {
+    justify-content: space-between;
+  }
+
+  .site-footer__logo {
+    width: 140px;
+  }
+
+  .site-footer__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+  }
+
+  .site-footer__button {
+    gap: 10px;
+    padding-inline: 22px;
+  }
+}
