@@ -22,7 +22,7 @@
 
 /* Pages that don't start with the hero photo leave room for the fixed header */
 main > :first-child:not(.hero) {
-  margin-top: calc(var(--header-top) + var(--header-height));
+  margin-top: var(--header-height);
 }
 
 .site-header__bar {
