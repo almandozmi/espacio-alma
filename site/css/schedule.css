@@ -1,0 +1,143 @@
+/* Edge-to-edge gray band with rounded corners, a little apart from the block above */
+.section--gray {
+  margin-top: 12px;
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+
+  @media (min-width: 768px) {
+    margin-top: 16px;
+    border-radius: 32px;
+  }
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  svg {
+    color: var(--accent);
+  }
+}
+
+.schedule {
+  display: grid;
+  gap: 14px;
+  max-width: 960px;
+  margin: 24px auto 0;
+
+  @media (min-width: 768px) {
+    gap: 20px;
+    margin-top: 40px;
+  }
+}
+
+.schedule__group {
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  & + & {
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+
+    @media (min-width: 768px) {
+      padding-top: 20px;
+    }
+  }
+}
+
+.schedule__days {
+  margin-bottom: 8px;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+
+  @media (min-width: 768px) {
+    margin: 0;
+    padding-top: 12px;
+    font-size: 1rem;
+    text-align: left;
+  }
+}
+
+.schedule__slots {
+  display: grid;
+  gap: 6px;
+
+  @media (min-width: 768px) {
+    gap: 10px;
+  }
+}
+
+/* Phones: five pills per row, shorter rows centered */
+.schedule__times {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+
+  li {
+    display: flex;
+    flex: 0 0 calc((100% - 4 * 6px) / 5);
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding-block: 7px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+    gap: 10px;
+
+    li {
+      gap: 8px;
+      padding-block: 10px;
+      border-radius: 12px;
+      font-size: 1rem;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.booking {
+  margin-top: 48px;
+  text-align: center;
+}
+
+.booking__terms {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
