@@ -27,9 +27,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      # shortcut: skipped while site/ has no pages, remove this condition in PR 1
-      - if: hashFiles('site/**/*.html') != ''
-        run: docker run --rm -v "$PWD/site:/site:ro" ghcr.io/validator/validator:latest@sha256:f10441aee7dcea043d2153b0a8bbce13dafeafc8a3680b69b88b83ba5b9880f5 java -jar /vnu.jar --skip-non-html /site
+      - run: docker run --rm -v "$PWD/site:/site:ro" ghcr.io/validator/validator:latest@sha256:f10441aee7dcea043d2153b0a8bbce13dafeafc8a3680b69b88b83ba5b9880f5 java -jar /vnu.jar /site/index.html
 
   semgrep:
     runs-on: ubuntu-latest
