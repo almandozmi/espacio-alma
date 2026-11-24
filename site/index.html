@@ -24,6 +24,7 @@
   <link rel="preload" href="/fonts/nunito-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/hero.css">
   <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
@@ -49,6 +50,17 @@
       </div>
     </div>
   </header>
+  <main>
+    <section class="hero">
+      <h1 class="sr-only">Espacio Alma Pilates Reformer</h1>
+      <!-- shortcut: no srcset, the full-screen cover crop never shows it under ~925px wide; add one if a larger original replaces it -->
+      <img class="hero__photo hero__photo--backbend" src="/images/photos/backbend-on-mat-horizontal.jpg" alt="Alumna haciendo un puente con una pierna elevada sobre una colchoneta, frente a una pared de listones de madera" width="1493" height="839" fetchpriority="high">
+      <div class="hero__content">
+        <p class="hero__title">Entrenamiento consciente, movimiento y bienestar</p>
+        <p class="hero__tagline">Un espacio pensado para fortalecer tu cuerpo y encontrar tu equilibrio, a tu ritmo.</p>
+      </div>
+    </section>
+  </main>
   <footer id="contacto" class="site-footer">
     <div class="container">
       <div class="site-footer__body">
