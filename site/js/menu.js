@@ -33,6 +33,11 @@ document.addEventListener("pointerdown", (event) => {
   if (nav.dataset.open === "true" && !header.contains(event.target)) setOpen(false);
 });
 
+// relatedTarget is null when focus leaves the window or goes nowhere, and that shouldn't close it
+header.addEventListener("focusout", (event) => {
+  if (nav.dataset.open === "true" && event.relatedTarget && !header.contains(event.relatedTarget)) setOpen(false);
+});
+
 document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape" || nav.dataset.open !== "true") return;
   setOpen(false);
