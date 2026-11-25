@@ -3,8 +3,7 @@
   font-weight: 600;
 }
 
-/* Phones: one card per row, prices on the right (they wrap below if they don't fit).
-   Wider screens: the three monthly plans on top, the two single classes centered under them. */
+/* Phones: one card per row; wider screens: the three monthly plans on top, the two single classes centered below */
 .plans {
   display: grid;
   gap: 12px;
@@ -168,7 +167,6 @@
   }
 }
 
-/* Dark, so it stands out on the light gray card */
 .plan__button {
   flex: 1 1 0;
   flex-direction: column;

@@ -178,7 +178,6 @@ p {
 
 .section {
   padding-block: var(--section-space);
-  /* Lands the title right under the header when jumping from the menu */
   scroll-margin-top: calc(var(--anchor-gap) - var(--section-space));
 }
 
