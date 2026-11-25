@@ -14,9 +14,21 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to bottom, rgb(0 0 0 / 0.4) 0%, rgb(0 0 0 / 0) 40%),
-      linear-gradient(to right, rgb(0 0 0 / 0.3) 0%, rgb(0 0 0 / 0) 55%),
+      linear-gradient(to bottom, rgb(0 0 0 / 0.45) 0%, rgb(0 0 0 / 0) 40%),
+      linear-gradient(to right, rgb(0 0 0 / 0.65) 0%, rgb(0 0 0 / 0.4) 40%, rgb(0 0 0 / 0) 70%),
       linear-gradient(to top, rgb(0 0 0 / 0.25) 0%, rgb(0 0 0 / 0) 30%);
+  }
+
+  /* Phones: ends where the next section's title still fits on screen (128px to its bottom + 16px gap), text at the bottom */
+  @media (max-width: 767px) {
+    align-items: flex-end;
+    min-height: max(480px, calc(100svh - 144px));
+
+    &::after {
+      background:
+        linear-gradient(to top, rgb(0 0 0 / 0.75) 0%, rgb(0 0 0 / 0.45) 35%, rgb(0 0 0 / 0) 65%),
+        linear-gradient(to bottom, rgb(0 0 0 / 0.4) 0%, rgb(0 0 0 / 0) 25%);
+    }
   }
 
   @media (min-width: 768px) {
@@ -30,14 +42,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
 
-/* Keeps the student, right of center, in view on every screen */
-.hero__photo--backbend {
-  object-position: 62% 75%;
-
-  @media (min-width: 768px) {
-    object-position: 60% 75%;
+  /* Keeps the reformers in view on phones */
+  @media (max-width: 767px) {
+    object-position: 32% 50%;
   }
 }
 
@@ -50,14 +58,14 @@
   gap: 20px;
   width: 100%;
   max-width: 560px;
-  padding: calc(var(--header-height) + 96px) var(--page-edge) 40px;
+  padding: 0 var(--page-edge) 56px;
   color: var(--color-white);
   text-shadow: 0 1px 20px rgb(0 0 0 / 0.25);
 
   @media (min-width: 768px) {
     gap: 24px;
     max-width: 840px;
-    /* The space above shrinks on short windows, so the text rises instead of running into the student */
+    /* The space above shrinks on short windows, so the text rises instead of reaching the bottom */
     padding: calc(var(--header-height) + clamp(40px, 22svh - 40px, 180px)) 64px 88px var(--page-edge);
   }
 }
@@ -69,7 +77,7 @@
   line-height: 1;
   letter-spacing: -0.03em;
   text-wrap: balance;
-  /* Narrow enough that the headline stays clear of the student */
+  /* Narrow enough to stay on the darkened left of the photo */
   max-width: 7.5em;
 
   /* Short windows shrink the four-line headline too */
