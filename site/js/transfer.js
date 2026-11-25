@@ -14,16 +14,17 @@ error.setAttribute("role", "alert");
 error.textContent = "No pudimos enviar tus datos. Revisa tu conexión e inténtalo de nuevo.";
 let sending = false;
 
-// Our own messages replace the browser bubbles; without JavaScript the browser validates instead
+// Our own messages replace the browser bubbles; novalidate also tells the CSS to show the form
 form.noValidate = true;
+dialog.querySelector(".transfer__done").remove();
 // "false", not unset: Firefox and Safari announce an empty required field as invalid before any typing
 const clearInvalid = () => [name, email, phone].forEach((input) => input.setAttribute("aria-invalid", "false"));
 clearInvalid();
 
-// The select only shows if this script didn't load; here the button that opened the dialog picks the plan
+// The button that opened the dialog picks the plan; shown as "4 clases al mes · $54.000"
 function choose(button) {
   plan.value = button.value;
-  dialog.querySelector(".transfer__plan").textContent = plan.selectedOptions[0]?.text ?? "";
+  dialog.querySelector(".transfer__plan").textContent = button.value.replace(" (", " · ").replace(")", "");
 }
 
 if (!hasInvokers) {

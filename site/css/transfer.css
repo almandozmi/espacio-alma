@@ -14,7 +14,7 @@ html:has(.transfer[open]) {
   color: var(--on-surface);
   text-align: left;
   overscroll-behavior: contain;
-  /* The page is dark but this box is light: native controls like the select arrow must match the box */
+  /* The page is dark but this box is light: native parts of the fields must match the box */
   color-scheme: light;
 
   /* The box takes focus on open so the close button isn't shown as focused; screen readers announce its title */
@@ -125,30 +125,9 @@ html:has(.transfer[open]) {
   margin-top: 4px;
   color: var(--on-surface-muted);
 
-  /* transfer.js fills it; without JavaScript the select below names the plan instead */
+  /* transfer.js fills it, so it stays hidden without JavaScript */
   &:empty {
     display: none;
-  }
-}
-
-.transfer__choice {
-  display: grid;
-  gap: 6px;
-
-  /* transfer.js sets novalidate and picks the plan from the button, so the list only shows if it didn't load */
-  .transfer__form[novalidate] & {
-    display: none;
-  }
-
-  & label {
-    padding-inline: 16px;
-    color: var(--on-surface-muted);
-    font-size: 0.85rem;
-  }
-
-  & select {
-    min-height: 60px;
-    padding-inline: 12px;
   }
 }
 
@@ -164,6 +143,11 @@ html:has(.transfer[open]) {
   margin-top: 20px;
 }
 
+/* transfer.js sets novalidate; until it runs the message above stands in for the form */
+.transfer__form:not([novalidate]) {
+  display: none;
+}
+
 /* Only focused by script after sending, so screen readers read the thanks */
 .transfer__done:focus {
   outline: none;
@@ -174,8 +158,7 @@ html:has(.transfer[open]) {
 }
 
 /* 16px or more so phones don't zoom in on the field */
-.field input,
-.transfer__choice select {
+.field input {
   width: 100%;
   border: 0;
   border-radius: 16px;
@@ -188,11 +171,6 @@ html:has(.transfer[open]) {
   &:focus {
     outline: 2px solid transparent;
     box-shadow: inset 0 0 0 2px var(--on-surface);
-  }
-
-  /* Without novalidate transfer.js didn't load and the browser validates, so its own invalid state gets the red border */
-  .transfer__form:not([novalidate]) &:user-invalid {
-    box-shadow: inset 0 0 0 2px var(--color-error);
   }
 }
 
