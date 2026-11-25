@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="/css/schedule.css">
   <link rel="stylesheet" href="/css/pricing.css">
   <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/transfer.css">
   <script type="module" src="/js/menu.js"></script>
 </head>
 <body>
@@ -145,7 +146,6 @@
       <div class="container">
         <h2 class="title">Valores</h2>
         <p class="subtitle subtitle--strong">Valores vigentes por próxima inauguración</p>
-        <!-- shortcut: the transfer buttons do nothing yet, the form arrives in PR 4 -->
         <ul class="plans">
           <li class="plan">
             <div class="plan__info">
@@ -154,7 +154,7 @@
             </div>
             <p class="plan__prices"><s class="plan__previous"><span class="sr-only">Precio normal: </span>$60.000</s><span class="plan__price"><span class="sr-only">Precio actual: </span>$54.000</span><span class="plan__note">IVA incluido</span></p>
             <div class="plan__buttons">
-              <button type="button" class="button plan__button"><span>Comprar</span><span class="plan__method">Transferencia</span><span class="sr-only"> 4 clases al mes</span></button>
+              <button type="button" class="button plan__button" commandfor="transfer" command="show-modal" value="4 clases al mes ($54.000)"><span>Comprar</span><span class="plan__method">Transferencia</span><span class="sr-only"> 4 clases al mes</span></button>
               <a class="button plan__button" href="https://agendapro.com/site/cl/pilatesdemariacarolinajimenez/584762?hide_nearby=true" target="_blank" rel="noopener noreferrer"><span>Comprar</span><span class="plan__method">Pago con tarjeta</span><span class="sr-only"> 4 clases al mes</span></a>
             </div>
           </li>
@@ -165,7 +165,7 @@
             </div>
             <p class="plan__prices"><s class="plan__previous"><span class="sr-only">Precio normal: </span>$104.000</s><span class="plan__price"><span class="sr-only">Precio actual: </span>$94.500</span><span class="plan__note">IVA incluido</span></p>
             <div class="plan__buttons">
-              <button type="button" class="button plan__button"><span>Comprar</span><span class="plan__method">Transferencia</span><span class="sr-only"> 8 clases al mes</span></button>
+              <button type="button" class="button plan__button" commandfor="transfer" command="show-modal" value="8 clases al mes ($94.500)"><span>Comprar</span><span class="plan__method">Transferencia</span><span class="sr-only"> 8 clases al mes</span></button>
               <a class="button plan__button" href="https://agendapro.com/site/cl/pilatesdemariacarolinajimenez/584762?hide_nearby=true" target="_blank" rel="noopener noreferrer"><span>Comprar</span><span class="plan__method">Pago con tarjeta</span><span class="sr-only"> 8 clases al mes</span></a>
             </div>
           </li>
@@ -176,7 +176,7 @@
             </div>
             <p class="plan__prices"><s class="plan__previous"><span class="sr-only">Precio normal: </span>$145.000</s><span class="plan__price"><span class="sr-only">Precio actual: </span>$135.000</span><span class="plan__note">IVA incluido</span></p>
             <div class="plan__buttons">
-              <button type="button" class="button plan__button"><span>Comprar</span><span class="plan__method">Transferencia</span><span class="sr-only"> 12 clases al mes</span></button>
+              <button type="button" class="button plan__button" commandfor="transfer" command="show-modal" value="12 clases al mes ($135.000)"><span>Comprar</span><span class="plan__method">Transferencia</span><span class="sr-only"> 12 clases al mes</span></button>
               <a class="button plan__button" href="https://agendapro.com/site/cl/pilatesdemariacarolinajimenez/584762?hide_nearby=true" target="_blank" rel="noopener noreferrer"><span>Comprar</span><span class="plan__method">Pago con tarjeta</span><span class="sr-only"> 12 clases al mes</span></a>
             </div>
           </li>
@@ -186,7 +186,7 @@
             </div>
             <p class="plan__prices"><span class="plan__price"><span class="sr-only">Precio actual: </span>$7.000</span><span class="plan__note">IVA incluido</span></p>
             <div class="plan__buttons">
-              <button type="button" class="button plan__button"><span>Comprar</span><span class="sr-only"> 1 clase de prueba</span></button>
+              <button type="button" class="button plan__button" commandfor="transfer" command="show-modal" value="1 clase de prueba ($7.000)"><span>Comprar</span><span class="sr-only"> 1 clase de prueba</span></button>
             </div>
           </li>
           <li class="plan">
@@ -196,11 +196,58 @@
             </div>
             <p class="plan__prices"><span class="plan__price"><span class="sr-only">Precio actual: </span>$18.000</span><span class="plan__note">IVA incluido</span></p>
             <div class="plan__buttons">
-              <button type="button" class="button plan__button"><span>Comprar</span><span class="plan__method">Transferencia</span><span class="sr-only"> 1 clase al mes</span></button>
+              <button type="button" class="button plan__button" commandfor="transfer" command="show-modal" value="1 clase al mes ($18.000)"><span>Comprar</span><span class="plan__method">Transferencia</span><span class="sr-only"> 1 clase al mes</span></button>
               <a class="button plan__button" href="https://agendapro.com/site/cl/pilatesdemariacarolinajimenez/584762?hide_nearby=true" target="_blank" rel="noopener noreferrer"><span>Comprar</span><span class="plan__method">Pago con tarjeta</span><span class="sr-only"> 1 clase al mes</span></a>
             </div>
           </li>
         </ul>
+        <dialog id="transfer" class="transfer" aria-labelledby="transfer-title" tabindex="-1" autofocus>
+          <div class="transfer__box">
+            <button type="button" class="transfer__close" aria-label="Cerrar" commandfor="transfer" command="close">×</button>
+            <h1 id="transfer-title" class="transfer__title">Pago con transferencia</h1>
+            <p class="transfer__plan"></p>
+            <form class="transfer__form" action="https://script.google.com/macros/s/AKfycbyb5BJ1t9gWfDEuC8ehNtrVmK2Mwu0qpOcT61RiPQJoORtY2RmeuXIYQFNbuqDO52m5QA/exec" method="post">
+              <p class="transfer__intro">Déjanos tus datos y te enviaremos por correo la información para transferir.</p>
+              <div class="transfer__choice">
+                <label for="transfer-plan">Plan</label>
+                <select id="transfer-plan" name="plan" required>
+                  <option value="" disabled selected>Elige un plan</option>
+                  <option value="4 clases al mes ($54.000)">4 clases al mes · $54.000</option>
+                  <option value="8 clases al mes ($94.500)">8 clases al mes · $94.500</option>
+                  <option value="12 clases al mes ($135.000)">12 clases al mes · $135.000</option>
+                  <option value="1 clase de prueba ($7.000)">1 clase de prueba · $7.000</option>
+                  <option value="1 clase al mes ($18.000)">1 clase al mes · $18.000</option>
+                </select>
+              </div>
+              <div class="field">
+                <input id="transfer-name" name="name" placeholder=" " required autocomplete="name" autocapitalize="words" maxlength="120" aria-describedby="transfer-name-message">
+                <label for="transfer-name">Nombre y apellido</label>
+                <p id="transfer-name-message" class="field__message" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <input id="transfer-email" name="email" type="email" inputmode="email" placeholder=" " required autocomplete="email" autocorrect="off" spellcheck="false" maxlength="120" aria-describedby="transfer-email-message">
+                <label for="transfer-email">Correo</label>
+                <p id="transfer-email-message" class="field__message" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <input id="transfer-phone" name="phone" type="tel" placeholder="+56 9 1234 5678" required autocomplete="tel" maxlength="20" aria-describedby="transfer-phone-message">
+                <label for="transfer-phone">Teléfono</label>
+                <p id="transfer-phone-message" class="field__message" aria-live="polite"></p>
+              </div>
+              <input class="transfer__trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <p class="transfer__privacy">Usamos tus datos solo para tu inscripción y el pago. Más información en los <a href="/terminos-y-condiciones" target="_blank" rel="noopener noreferrer">Términos y Condiciones</a>.</p>
+              <button type="submit" class="button transfer__submit">Enviar</button>
+            </form>
+          </div>
+        </dialog>
+        <template id="transfer-done">
+          <div class="transfer__done" tabindex="-1">
+            <p>Gracias por la información. En breve te contactaremos para enviarte los datos de transferencia.</p>
+            <!-- Against scams: someone could write pretending to be the studio with another bank account -->
+            <p><strong>IMPORTANTE:</strong> Los datos para transferir te llegarán solo desde <strong class="transfer__email">espacioalmapilates@gmail.com</strong>. Si recibes datos bancarios desde otra dirección, no transfieras y avísanos.</p>
+            <button type="button" class="button transfer__submit">Cerrar</button>
+          </div>
+        </template>
       </div>
     </section>
   </main>

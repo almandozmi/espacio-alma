@@ -1,0 +1,321 @@
+/* Safari doesn't yet honor overscroll-behavior on the backdrop, so this keeps the page behind still there */
+html:has(.transfer[open]) {
+  overflow: hidden;
+}
+
+.transfer {
+  width: min(440px, calc(100% - 2 * var(--gutter)));
+  max-height: calc(100dvh - 2 * var(--gutter));
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 28px;
+  background: var(--surface);
+  color: var(--on-surface);
+  text-align: left;
+  overscroll-behavior: contain;
+  /* The page is dark but this box is light: native controls like the select arrow must match the box */
+  color-scheme: light;
+
+  /* The box takes focus on open so the close button isn't shown as focused; screen readers announce its title */
+  &:focus {
+    outline: none;
+  }
+
+  /* In a narrow box "pretty" breaks lines too early and leaves gaps on the right */
+  & p {
+    text-wrap: wrap;
+  }
+
+  /* overflow: hidden makes the backdrop a scroll container, so overscroll-behavior applies to it */
+  &::backdrop {
+    overflow: hidden;
+    overscroll-behavior: contain;
+    background: rgb(0 0 0 / 0.7);
+  }
+
+  &[open] {
+    animation: transfer-in 380ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  &[open]::backdrop {
+    animation: transfer-fade-in 320ms ease-out;
+  }
+
+  /* transfer.js sets data-closing and waits for these to end before closing */
+  &[data-closing] {
+    animation: transfer-out 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+  }
+
+  &[data-closing]::backdrop {
+    animation: transfer-fade-out 220ms ease-in forwards;
+  }
+}
+
+@keyframes transfer-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+}
+
+@keyframes transfer-out {
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+
+@keyframes transfer-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes transfer-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.transfer__box {
+  position: relative;
+  padding: 28px 22px 24px;
+
+  @media (min-width: 768px) {
+    padding: 36px 36px 32px;
+  }
+}
+
+.transfer__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--on-surface);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--on-surface);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: rgb(0 0 0 / 0.08);
+    }
+  }
+}
+
+.transfer__title {
+  padding-right: 40px;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.transfer__plan {
+  margin-top: 4px;
+  color: var(--on-surface-muted);
+
+  /* transfer.js fills it; without JavaScript the select below names the plan instead */
+  &:empty {
+    display: none;
+  }
+}
+
+.transfer__choice {
+  display: grid;
+  gap: 6px;
+
+  /* transfer.js sets novalidate and picks the plan from the button, so the list only shows if it didn't load */
+  .transfer__form[novalidate] & {
+    display: none;
+  }
+
+  & label {
+    padding-inline: 16px;
+    color: var(--on-surface-muted);
+    font-size: 0.85rem;
+  }
+
+  /* 16px or more so phones don't zoom in on the field */
+  & select {
+    width: 100%;
+    min-height: 60px;
+    padding-inline: 12px;
+    border: 0;
+    border-radius: 16px;
+    background: var(--color-white);
+    color: var(--on-surface);
+    font: inherit;
+    font-size: 1rem;
+
+    &:focus {
+      outline: 2px solid transparent;
+      box-shadow: inset 0 0 0 2px var(--on-surface);
+    }
+
+    &:user-invalid {
+      box-shadow: inset 0 0 0 2px var(--color-error);
+    }
+  }
+}
+
+.transfer__intro {
+  font-size: 0.95rem;
+}
+
+.transfer__form,
+.transfer__done {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Only focused by script after sending, so screen readers read the thanks */
+.transfer__done:focus {
+  outline: none;
+}
+
+.field {
+  position: relative;
+}
+
+.field input {
+  width: 100%;
+  height: 60px;
+  padding: 27px 16px 9px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--color-white);
+  color: var(--on-surface);
+  font: inherit;
+  font-size: 1rem;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:focus::placeholder {
+    color: #8a8a8a;
+  }
+
+  /* The transparent outline stands in for the shadow in Windows high contrast mode, which hides shadows */
+  &:focus {
+    outline: 2px solid transparent;
+    box-shadow: inset 0 0 0 2px var(--on-surface);
+  }
+
+  &[aria-invalid="true"] {
+    box-shadow: inset 0 0 0 2px var(--color-error);
+  }
+
+  /* Without novalidate transfer.js didn't load and the browser validates, so its own invalid state gets the red border */
+  .transfer__form:not([novalidate]) &:user-invalid {
+    box-shadow: inset 0 0 0 2px var(--color-error);
+  }
+}
+
+/* The label sits inside the empty field and moves up over the text; placeholder=" " makes :placeholder-shown work */
+.field label {
+  position: absolute;
+  top: 22px;
+  left: 16px;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--on-surface-muted);
+  pointer-events: none;
+  transform-origin: left center;
+  transition: transform 260ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label {
+  transform: translateY(-13px) scale(0.75);
+}
+
+.field__message {
+  margin-top: 6px;
+  padding-inline: 16px;
+  color: var(--color-error);
+  font-size: 0.85rem;
+
+  /* Kept in the page when empty: a live region that appears, instead of changing, isn't announced reliably */
+  &:empty {
+    margin-top: 0;
+  }
+}
+
+.field__fix {
+  margin-left: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--on-surface);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.transfer__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+}
+
+.transfer__email {
+  overflow-wrap: anywhere;
+}
+
+.transfer__privacy {
+  color: var(--on-surface-muted);
+  font-size: 0.8rem;
+
+  & a {
+    color: var(--on-surface);
+  }
+}
+
+.transfer__error {
+  color: var(--color-error);
+  font-size: 0.9rem;
+}
+
+.transfer__submit {
+  margin-top: 6px;
+  background: var(--on-surface);
+  color: var(--surface);
+
+  &[aria-disabled="true"] {
+    opacity: 0.7;
+  }
+
+  &:focus-visible {
+    outline-color: var(--on-surface);
+  }
+
+  /* .transfer outranks the general .button hover */
+  @media (hover: hover) and (pointer: fine) {
+    .transfer &:not([aria-disabled="true"]):hover {
+      background: var(--on-surface-hover);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transfer[open],
+  .transfer[open]::backdrop {
+    animation: none;
+  }
+}
