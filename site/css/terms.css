@@ -1,0 +1,64 @@
+.terms {
+  max-width: calc(700px + 2 * 48px);
+  padding-inline: max(28px, env(safe-area-inset-left, 0px));
+  /* The email address can't be hyphenated and would overflow at 320px with large text */
+  overflow-wrap: break-word;
+
+  @media (min-width: 768px) {
+    padding-inline: max(48px, env(safe-area-inset-left, 0px));
+  }
+}
+
+.terms__title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 1.4rem + 2vw, 2.8rem);
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* Justified with Spanish hyphenation (lang="es"), to avoid large gaps between words */
+.terms__intro,
+.terms__section p,
+.terms li {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.terms__intro {
+  margin-top: 32px;
+  font-size: 1.1rem;
+}
+
+.terms__section {
+  margin-top: 40px;
+
+  h2 {
+    margin-bottom: 12px;
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+
+  p + p {
+    margin-top: 12px;
+  }
+
+  ul {
+    display: grid;
+    gap: 6px;
+    margin-top: 12px;
+    padding-left: 1.4em;
+    list-style: disc;
+  }
+
+  li {
+    text-wrap: pretty;
+  }
+
+  li::marker {
+    color: var(--accent);
+  }
+}
