@@ -24,6 +24,10 @@
   <link rel="preload" href="/fonts/nunito-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/about.css">
+  <link rel="stylesheet" href="/css/schedule.css">
+  <link rel="stylesheet" href="/css/pricing.css">
   <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
@@ -49,6 +53,155 @@
       </div>
     </div>
   </header>
+  <main>
+    <section class="hero">
+      <h1 class="sr-only">Espacio Alma Pilates Reformer</h1>
+      <!-- shortcut: no srcset, the full-screen cover crop never shows it under ~925px wide; add one if a larger original replaces it -->
+      <img class="hero__photo hero__photo--backbend" src="/images/photos/backbend-on-mat-horizontal.jpg" alt="Alumna haciendo un puente con una pierna elevada sobre una colchoneta, frente a una pared de listones de madera" width="1493" height="839" fetchpriority="high">
+      <div class="hero__content">
+        <p class="hero__title">Entrenamiento consciente, movimiento y bienestar</p>
+        <p class="hero__tagline">Un espacio pensado para fortalecer tu cuerpo y encontrar tu equilibrio, a tu ritmo.</p>
+      </div>
+    </section>
+    <section id="quienes-somos" class="about">
+      <h2 class="title">¿Quiénes somos?</h2>
+      <div class="about__text">
+        <p>Bienvenidos a Espacio Alma, un lugar creado para conectar movimiento, bienestar y entrenamiento en un ambiente seguro, tranquilo y acogedor. Somos un estudio de Pilates Reformer, pensado para quienes buscan incorporar el movimiento a su vida de una manera consciente, personalizada y de calidad.</p>
+        <p>Creamos este espacio con la idea de ofrecer una experiencia diferente: más cercana, más personalizada y enfocada en el bienestar integral. Te invitamos a encontrar tu espacio, tu ritmo y tu bienestar en Espacio Alma.</p>
+      </div>
+      <ul class="photo-trio">
+        <li><img src="/images/photos/reformer-back-stretch-vertical.jpg" srcset="/images/photos/reformer-back-stretch-vertical-512.jpg 512w, /images/photos/reformer-back-stretch-vertical.jpg 1024w" sizes="(min-width: 1240px) 385px, 31vw" alt="Alumnas estirando la espalda en máquinas reformer" width="1024" height="1536" loading="lazy"></li>
+        <li><img src="/images/photos/reformer-legs-in-straps-vertical.jpg" srcset="/images/photos/reformer-legs-in-straps-vertical-512.jpg 512w, /images/photos/reformer-legs-in-straps-vertical.jpg 1054w" sizes="(min-width: 1240px) 470px, (min-width: 768px) 38vw, calc(46vw - 11px)" alt="Alumna acostada en el reformer con las piernas en las correas" width="1054" height="1492" loading="lazy"></li>
+        <li><img src="/images/photos/pilates-ring-with-logo-vertical.jpg" srcset="/images/photos/pilates-ring-with-logo-vertical-512.jpg 512w, /images/photos/pilates-ring-with-logo-vertical.jpg 1024w" sizes="(min-width: 1240px) 385px, 31vw" alt="Alumna sentada con un aro de pilates, con el logo de Espacio Alma en la pared" width="1024" height="1536" loading="lazy"></li>
+      </ul>
+    </section>
+    <section id="horarios" class="section section--gray">
+      <div class="container">
+        <h2 class="title">Horarios</h2>
+        <p class="subtitle">Todas las clases duran 50 minutos.</p>
+        <!-- Lucide "sun" and "sunset" icons (ISC license), drawn once here and reused by every time -->
+        <p class="legend" aria-hidden="true">
+          <span><svg width="18" height="18"><symbol id="icon-morning" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></g></symbol><use href="#icon-morning"/></svg> Mañana</span>
+          <span><svg width="18" height="18"><symbol id="icon-afternoon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" d="M12 10V2M4.93 10.93l1.41 1.41M2 18h2M20 18h2M19.07 10.93l-1.41 1.41M22 22H2M16 6l-4 4-4-4M16 18a4 4 0 0 0-8 0"/></symbol><use href="#icon-afternoon"/></svg> Tarde</span>
+        </p>
+        <div class="schedule">
+          <div class="schedule__group">
+            <h3 class="schedule__days">Lunes a jueves</h3>
+            <div class="schedule__slots">
+              <ul class="schedule__times" aria-label="Mañana">
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>07:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>08:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>09:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>10:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>11:00</li>
+              </ul>
+              <ul class="schedule__times" aria-label="Tarde">
+                <li><svg aria-hidden="true"><use href="#icon-afternoon"/></svg>17:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-afternoon"/></svg>18:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-afternoon"/></svg>19:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-afternoon"/></svg>20:00</li>
+              </ul>
+            </div>
+          </div>
+          <div class="schedule__group">
+            <h3 class="schedule__days">Viernes</h3>
+            <div class="schedule__slots">
+              <ul class="schedule__times" aria-label="Mañana">
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>07:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>08:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>09:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>10:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>11:00</li>
+              </ul>
+              <ul class="schedule__times" aria-label="Tarde">
+                <li><svg aria-hidden="true"><use href="#icon-afternoon"/></svg>14:30</li>
+                <li><svg aria-hidden="true"><use href="#icon-afternoon"/></svg>15:30</li>
+                <li><svg aria-hidden="true"><use href="#icon-afternoon"/></svg>16:30</li>
+                <li><svg aria-hidden="true"><use href="#icon-afternoon"/></svg>17:30</li>
+              </ul>
+            </div>
+          </div>
+          <div class="schedule__group">
+            <h3 class="schedule__days">Sábado</h3>
+            <div class="schedule__slots">
+              <ul class="schedule__times" aria-label="Mañana">
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>09:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>10:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>11:00</li>
+                <li><svg aria-hidden="true"><use href="#icon-morning"/></svg>12:00</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="booking">
+          <a class="button" href="https://agendapro.com/site/cl/pilatesdemariacarolinajimenez/584762?hide_nearby=true" target="_blank" rel="noopener noreferrer">Agendar</a>
+          <p class="booking__terms">Al agendar aceptas nuestros <a href="/terminos-y-condiciones">Términos y Condiciones</a></p>
+        </div>
+      </div>
+    </section>
+    <section id="valores" class="section">
+      <div class="container">
+        <h2 class="title">Valores</h2>
+        <p class="subtitle subtitle--strong">Valores vigentes por próxima inauguración</p>
+        <!-- shortcut: the transfer buttons do nothing yet, the form arrives in PR 4 -->
+        <ul class="plans">
+          <li class="plan">
+            <div class="plan__info">
+              <h3 class="plan__name"><span class="plan__count">4</span> <span class="plan__unit">clases al mes</span></h3>
+              <p class="plan__detail">1 clase por semana</p>
+            </div>
+            <p class="plan__prices"><s class="plan__previous"><span class="sr-only">Precio normal: </span>$60.000</s><span class="plan__price"><span class="sr-only">Precio actual: </span>$54.000</span><span class="plan__note">IVA incluido</span></p>
+            <div class="plan__buttons">
+              <button type="button" class="button plan__button"><span>Comprar</span><span class="plan__method">Transferencia</span><span class="sr-only"> 4 clases al mes</span></button>
+              <a class="button plan__button" href="https://agendapro.com/site/cl/pilatesdemariacarolinajimenez/584762?hide_nearby=true" target="_blank" rel="noopener noreferrer"><span>Comprar</span><span class="plan__method">Pago con tarjeta</span><span class="sr-only"> 4 clases al mes</span></a>
+            </div>
+          </li>
+          <li class="plan">
+            <div class="plan__info">
+              <h3 class="plan__name"><span class="plan__count">8</span> <span class="plan__unit">clases al mes</span></h3>
+              <p class="plan__detail">2 clases por semana</p>
+            </div>
+            <p class="plan__prices"><s class="plan__previous"><span class="sr-only">Precio normal: </span>$104.000</s><span class="plan__price"><span class="sr-only">Precio actual: </span>$94.500</span><span class="plan__note">IVA incluido</span></p>
+            <div class="plan__buttons">
+              <button type="button" class="button plan__button"><span>Comprar</span><span class="plan__method">Transferencia</span><span class="sr-only"> 8 clases al mes</span></button>
+              <a class="button plan__button" href="https://agendapro.com/site/cl/pilatesdemariacarolinajimenez/584762?hide_nearby=true" target="_blank" rel="noopener noreferrer"><span>Comprar</span><span class="plan__method">Pago con tarjeta</span><span class="sr-only"> 8 clases al mes</span></a>
+            </div>
+          </li>
+          <li class="plan">
+            <div class="plan__info">
+              <h3 class="plan__name"><span class="plan__count">12</span> <span class="plan__unit">clases al mes</span></h3>
+              <p class="plan__detail">3 clases por semana</p>
+            </div>
+            <p class="plan__prices"><s class="plan__previous"><span class="sr-only">Precio normal: </span>$145.000</s><span class="plan__price"><span class="sr-only">Precio actual: </span>$135.000</span><span class="plan__note">IVA incluido</span></p>
+            <div class="plan__buttons">
+              <button type="button" class="button plan__button"><span>Comprar</span><span class="plan__method">Transferencia</span><span class="sr-only"> 12 clases al mes</span></button>
+              <a class="button plan__button" href="https://agendapro.com/site/cl/pilatesdemariacarolinajimenez/584762?hide_nearby=true" target="_blank" rel="noopener noreferrer"><span>Comprar</span><span class="plan__method">Pago con tarjeta</span><span class="sr-only"> 12 clases al mes</span></a>
+            </div>
+          </li>
+          <li class="plan">
+            <div class="plan__info">
+              <h3 class="plan__name"><span class="plan__count">1</span> <span class="plan__unit">clase de prueba</span></h3>
+            </div>
+            <p class="plan__prices"><span class="plan__price"><span class="sr-only">Precio actual: </span>$7.000</span><span class="plan__note">IVA incluido</span></p>
+            <div class="plan__buttons">
+              <button type="button" class="button plan__button"><span>Comprar</span><span class="sr-only"> 1 clase de prueba</span></button>
+            </div>
+          </li>
+          <li class="plan">
+            <div class="plan__info">
+              <h3 class="plan__name"><span class="plan__count">1</span> <span class="plan__unit">clase al mes</span></h3>
+              <p class="plan__detail">Clase unitaria</p>
+            </div>
+            <p class="plan__prices"><span class="plan__price"><span class="sr-only">Precio actual: </span>$18.000</span><span class="plan__note">IVA incluido</span></p>
+            <div class="plan__buttons">
+              <button type="button" class="button plan__button"><span>Comprar</span><span class="plan__method">Transferencia</span><span class="sr-only"> 1 clase al mes</span></button>
+              <a class="button plan__button" href="https://agendapro.com/site/cl/pilatesdemariacarolinajimenez/584762?hide_nearby=true" target="_blank" rel="noopener noreferrer"><span>Comprar</span><span class="plan__method">Pago con tarjeta</span><span class="sr-only"> 1 clase al mes</span></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
   <footer id="contacto" class="site-footer">
     <div class="container">
       <div class="site-footer__body">

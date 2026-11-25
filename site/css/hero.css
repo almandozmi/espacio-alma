@@ -1,0 +1,91 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  /* svh keeps it a bit shorter than the screen with the browser bar showing, so the next section peeks in */
+  min-height: clamp(520px, 94svh, 1000px);
+  border-radius: 0 0 28px 28px;
+  background: var(--color-charcoal);
+
+  /* Darkens the top (header), the left (text) and a little the bottom, so white text reads on the photo */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgb(0 0 0 / 0.4) 0%, rgb(0 0 0 / 0) 40%),
+      linear-gradient(to right, rgb(0 0 0 / 0.3) 0%, rgb(0 0 0 / 0) 55%),
+      linear-gradient(to top, rgb(0 0 0 / 0.25) 0%, rgb(0 0 0 / 0) 30%);
+  }
+
+  @media (min-width: 768px) {
+    border-radius: 0 0 48px 48px;
+  }
+}
+
+.hero__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Keeps the student, right of center, in view on every screen */
+.hero__photo--backbend {
+  object-position: 62% 75%;
+
+  @media (min-width: 768px) {
+    object-position: 60% 75%;
+  }
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  max-width: 560px;
+  padding: calc(var(--header-height) + 96px) var(--page-edge) 40px;
+  color: var(--color-white);
+  text-shadow: 0 1px 20px rgb(0 0 0 / 0.25);
+
+  @media (min-width: 768px) {
+    gap: 24px;
+    max-width: 840px;
+    /* The space above shrinks on short windows, so the text rises instead of running into the student */
+    padding: calc(var(--header-height) + clamp(40px, 22svh - 40px, 180px)) 64px 88px var(--page-edge);
+  }
+}
+
+.hero__title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(2.3rem, 1.3rem + 3vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  /* Narrow enough that the headline stays clear of the student */
+  max-width: 7.5em;
+
+  /* Short windows shrink the four-line headline too */
+  @media (min-width: 768px) {
+    font-size: min(clamp(2.3rem, 1.3rem + 3vw, 4rem), 7.5svh);
+  }
+}
+
+.hero__tagline {
+  max-width: 37ch;
+  font-size: clamp(1rem, 0.2rem + 1.25vw, 1.3rem);
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.9);
+
+  /* Phones show only the headline, so the photo has more room */
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
