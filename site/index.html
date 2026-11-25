@@ -207,19 +207,17 @@
             <button type="button" class="transfer__close" aria-label="Cerrar" commandfor="transfer" command="close">×</button>
             <h1 id="transfer-title" class="transfer__title">Pago con transferencia</h1>
             <p class="transfer__plan"></p>
+            <!-- Sending needs transfer.js: without it Apps Script answers with raw JSON; transfer.js removes this -->
+            <div class="transfer__done">
+              <p>Para enviar el formulario necesitas activar JavaScript en tu navegador.</p>
+              <p>Si prefieres, escríbenos a <strong class="transfer__email">espacioalmapilates@gmail.com</strong> con el plan que quieres y te enviaremos los datos para transferir.</p>
+              <button type="button" class="button transfer__submit" commandfor="transfer" command="close">Cerrar</button>
+            </div>
+            <!-- The form posts to Apps Script, on another domain and with no session, so a CSRF token protects nothing -->
+            <!-- nosemgrep: python.django.security.django-no-csrf-token.django-no-csrf-token -->
             <form class="transfer__form" action="https://script.google.com/macros/s/AKfycbyb5BJ1t9gWfDEuC8ehNtrVmK2Mwu0qpOcT61RiPQJoORtY2RmeuXIYQFNbuqDO52m5QA/exec" method="post">
               <p class="transfer__intro">Déjanos tus datos y te enviaremos por correo la información para transferir.</p>
-              <div class="transfer__choice">
-                <label for="transfer-plan">Plan</label>
-                <select id="transfer-plan" name="plan" required>
-                  <option value="" disabled selected>Elige un plan</option>
-                  <option value="4 clases al mes ($54.000)">4 clases al mes · $54.000</option>
-                  <option value="8 clases al mes ($94.500)">8 clases al mes · $94.500</option>
-                  <option value="12 clases al mes ($135.000)">12 clases al mes · $135.000</option>
-                  <option value="1 clase de prueba ($7.000)">1 clase de prueba · $7.000</option>
-                  <option value="1 clase al mes ($18.000)">1 clase al mes · $18.000</option>
-                </select>
-              </div>
+              <input type="hidden" name="plan">
               <div class="field">
                 <input id="transfer-name" name="name" placeholder=" " required autocomplete="name" autocapitalize="words" maxlength="120" aria-describedby="transfer-name-message">
                 <label for="transfer-name">Nombre y apellido</label>
