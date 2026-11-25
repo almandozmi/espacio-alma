@@ -9,14 +9,16 @@
   border-bottom: 1px solid var(--header-glass-border);
   transition: background-color var(--transition), border-color var(--transition), color var(--transition);
 
-  /* Over the hero photo: no bar, so the photo shows through */
-  &[data-transparent="true"] {
-    background: transparent;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    border-bottom-color: transparent;
-    color: var(--color-white);
-    text-shadow: 0 1px 12px rgb(0 0 0 / 0.25);
+  /* Over the hero photo: no bar, so the photo shows through. Only with JS, which brings the bar back on scroll */
+  @media (scripting: enabled) {
+    &[data-transparent="true"] {
+      background: transparent;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      border-bottom-color: transparent;
+      color: var(--color-white);
+      text-shadow: 0 1px 12px rgb(0 0 0 / 0.25);
+    }
   }
 }
 
@@ -61,9 +63,14 @@ main > :first-child:not(.hero) {
   background: none;
   color: inherit;
   cursor: pointer;
+
+  /* Without JS it can't open anything, so the menu stays open instead */
+  @media (scripting: none) {
+    display: none;
+  }
 }
 
-.site-header__nav a {
+.site-header__nav a:not(.button) {
   display: block;
   font-family: var(--font-heading);
   letter-spacing: var(--tracking-label);
@@ -100,12 +107,18 @@ main > :first-child:not(.hero) {
       transition: opacity var(--transition), translate var(--transition);
     }
 
+    @media (scripting: none) {
+      opacity: 1;
+      visibility: visible;
+      translate: none;
+    }
+
     & ul {
       display: grid;
       gap: 4px;
     }
 
-    & a {
+    & a:not(.button) {
       padding: 14px 16px;
       border-radius: 12px;
       font-size: 1.1rem;
@@ -116,6 +129,16 @@ main > :first-child:not(.hero) {
         background: var(--header-press);
       }
     }
+
+    & .button {
+      display: flex;
+      margin-top: 8px;
+    }
+  }
+
+  /* On phones, booking moves into the menu */
+  .site-header__actions .button {
+    display: none;
   }
 }
 
@@ -148,6 +171,10 @@ main > :first-child:not(.hero) {
       gap: 4px;
     }
 
+    & .site-header__nav-booking {
+      display: none;
+    }
+
     & a {
       padding: 10px 18px;
       border-radius: 999px;
@@ -163,11 +190,11 @@ main > :first-child:not(.hero) {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .site-header__nav a:hover {
+  .site-header__nav a:not(.button):hover {
     background: var(--header-hover);
   }
 
-  .site-header[data-transparent="true"] .site-header__nav a:hover {
+  .site-header[data-transparent="true"] .site-header__nav a:not(.button):hover {
     background: rgb(255 255 255 / 0.15);
   }
 }
