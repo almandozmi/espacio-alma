@@ -28,6 +28,11 @@ header.addEventListener("click", (event) => {
   if (event.target.closest("a")) setOpen(false);
 });
 
+// pointerdown, not click: iOS Safari doesn't send click to document for taps on plain content
+document.addEventListener("pointerdown", (event) => {
+  if (nav.dataset.open === "true" && !header.contains(event.target)) setOpen(false);
+});
+
 document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape" || nav.dataset.open !== "true") return;
   setOpen(false);
@@ -39,5 +44,8 @@ matchMedia("(min-width: 768px)").addEventListener("change", (event) => {
   if (event.matches) setOpen(false);
 });
 
-addEventListener("scroll", updateHeader, { passive: true });
+addEventListener("scroll", () => {
+  if (nav.dataset.open === "true") setOpen(false);
+  else updateHeader();
+}, { passive: true });
 updateHeader();
