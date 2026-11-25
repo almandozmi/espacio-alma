@@ -146,26 +146,9 @@ html:has(.transfer[open]) {
     font-size: 0.85rem;
   }
 
-  /* 16px or more so phones don't zoom in on the field */
   & select {
-    width: 100%;
     min-height: 60px;
     padding-inline: 12px;
-    border: 0;
-    border-radius: 16px;
-    background: var(--color-white);
-    color: var(--on-surface);
-    font: inherit;
-    font-size: 1rem;
-
-    &:focus {
-      outline: 2px solid transparent;
-      box-shadow: inset 0 0 0 2px var(--on-surface);
-    }
-
-    &:user-invalid {
-      box-shadow: inset 0 0 0 2px var(--color-error);
-    }
   }
 }
 
@@ -190,16 +173,32 @@ html:has(.transfer[open]) {
   position: relative;
 }
 
-.field input {
+/* 16px or more so phones don't zoom in on the field */
+.field input,
+.transfer__choice select {
   width: 100%;
-  height: 60px;
-  padding: 27px 16px 9px;
   border: 0;
   border-radius: 16px;
   background: var(--color-white);
   color: var(--on-surface);
   font: inherit;
   font-size: 1rem;
+
+  /* The transparent outline stands in for the shadow in Windows high contrast mode, which hides shadows */
+  &:focus {
+    outline: 2px solid transparent;
+    box-shadow: inset 0 0 0 2px var(--on-surface);
+  }
+
+  /* Without novalidate transfer.js didn't load and the browser validates, so its own invalid state gets the red border */
+  .transfer__form:not([novalidate]) &:user-invalid {
+    box-shadow: inset 0 0 0 2px var(--color-error);
+  }
+}
+
+.field input {
+  height: 60px;
+  padding: 27px 16px 9px;
 
   &::placeholder {
     color: transparent;
@@ -209,18 +208,7 @@ html:has(.transfer[open]) {
     color: #8a8a8a;
   }
 
-  /* The transparent outline stands in for the shadow in Windows high contrast mode, which hides shadows */
-  &:focus {
-    outline: 2px solid transparent;
-    box-shadow: inset 0 0 0 2px var(--on-surface);
-  }
-
   &[aria-invalid="true"] {
-    box-shadow: inset 0 0 0 2px var(--color-error);
-  }
-
-  /* Without novalidate transfer.js didn't load and the browser validates, so its own invalid state gets the red border */
-  .transfer__form:not([novalidate]) &:user-invalid {
     box-shadow: inset 0 0 0 2px var(--color-error);
   }
 }
