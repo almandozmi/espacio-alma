@@ -1,8 +1,3 @@
-/* Lands with more room above its title than the other sections */
-#valores {
-  scroll-margin-top: calc(64px - var(--section-space));
-}
-
 .subtitle--strong {
   color: var(--text);
   font-weight: 600;

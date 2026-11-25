@@ -1,5 +1,8 @@
 .site-footer {
-  padding: 48px 0 calc(24px + env(safe-area-inset-bottom, 0px));
+  --top-space: 48px;
+  padding: var(--top-space) 0 calc(24px + env(safe-area-inset-bottom, 0px));
+  /* The logo lands where .section titles do */
+  scroll-margin-top: calc(var(--anchor-gap) - var(--top-space));
   background: var(--footer-bg);
   color: var(--color-white);
 
@@ -122,7 +125,8 @@
 
 @media (min-width: 768px) {
   .site-footer {
-    padding: 72px 0 calc(28px + env(safe-area-inset-bottom, 0px));
+    --top-space: 72px;
+    padding: var(--top-space) 0 calc(28px + env(safe-area-inset-bottom, 0px));
   }
 
   /* The map stretches to the full height of the details, so no empty space is left under them */

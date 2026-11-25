@@ -3,17 +3,17 @@
   justify-items: center;
   gap: 20px;
   margin-top: 12px;
-  /* The top padding clears the floating header when jumping here from the menu */
-  padding: 84px max(12px, env(safe-area-inset-left, 0px)) 12px;
+  --top-space: 84px;
+  padding: var(--top-space) max(12px, env(safe-area-inset-left, 0px)) 12px;
   text-align: center;
-  /* Lands the block 12px from the screen edge, so the hero photo doesn't show above it */
-  scroll-margin-top: calc(12px - var(--header-height));
+  /* The title lands where .section titles do */
+  scroll-margin-top: calc(var(--anchor-gap) - var(--top-space));
 
   @media (min-width: 768px) {
     gap: 28px;
     margin-top: 16px;
-    padding: 120px 32px 32px;
-    scroll-margin-top: calc(16px - var(--header-height));
+    --top-space: 120px;
+    padding: var(--top-space) 32px 32px;
   }
 }
 
