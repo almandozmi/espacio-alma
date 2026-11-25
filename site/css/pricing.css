@@ -185,7 +185,7 @@
   /* .plan outranks the general .button hover */
   @media (hover: hover) and (pointer: fine) {
     .plan &:hover {
-      background: #262626;
+      background: var(--on-surface-hover);
     }
   }
 }
