@@ -9,14 +9,16 @@
   border-bottom: 1px solid var(--header-glass-border);
   transition: background-color var(--transition), border-color var(--transition), color var(--transition);
 
-  /* Over the hero photo: no bar, so the photo shows through */
-  &[data-transparent="true"] {
-    background: transparent;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    border-bottom-color: transparent;
-    color: var(--color-white);
-    text-shadow: 0 1px 12px rgb(0 0 0 / 0.25);
+  /* Over the hero photo: no bar, so the photo shows through. Only with JS, which brings the bar back on scroll */
+  @media (scripting: enabled) {
+    &[data-transparent="true"] {
+      background: transparent;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      border-bottom-color: transparent;
+      color: var(--color-white);
+      text-shadow: 0 1px 12px rgb(0 0 0 / 0.25);
+    }
   }
 }
 
