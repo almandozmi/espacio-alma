@@ -61,6 +61,11 @@ main > :first-child:not(.hero) {
   background: none;
   color: inherit;
   cursor: pointer;
+
+  /* Without JS it can't open anything, so the menu stays open instead */
+  @media (scripting: none) {
+    display: none;
+  }
 }
 
 .site-header__nav a {
@@ -98,6 +103,12 @@ main > :first-child:not(.hero) {
       visibility: visible;
       translate: none;
       transition: opacity var(--transition), translate var(--transition);
+    }
+
+    @media (scripting: none) {
+      opacity: 1;
+      visibility: visible;
+      translate: none;
     }
 
     & ul {
