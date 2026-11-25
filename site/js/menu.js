@@ -23,7 +23,7 @@ button.addEventListener("click", () => {
   if (open) nav.querySelector("a").focus();
 });
 
-nav.addEventListener("click", (event) => {
+header.addEventListener("click", (event) => {
   if (event.target.closest("a")) setOpen(false);
 });
 
