@@ -120,13 +120,15 @@ form.addEventListener("submit", async (event) => {
     // A simple form POST needs no CORS preflight, which Apps Script can't answer
     const response = await fetch(form.action, { method: "POST", body: new URLSearchParams(new FormData(form)) });
     if (!(await response.json()).ok) throw new Error("Rejected");
+    // Closed while sending: the next open must show a fresh form, not this result
+    if (!dialog.open) return;
     const done = doneTemplate.content.firstElementChild.cloneNode(true);
     done.querySelector("button").addEventListener("click", close);
     form.replaceWith(done);
     // The submit button just disappeared; focus on the thanks so screen readers read it
     done.focus();
   } catch {
-    form.querySelector(".transfer__privacy").before(error);
+    if (dialog.open) form.querySelector(".transfer__privacy").before(error);
   } finally {
     sending = false;
     submit.removeAttribute("aria-disabled");
