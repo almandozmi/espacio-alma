@@ -2,10 +2,11 @@ const header = document.querySelector(".site-header");
 const nav = document.querySelector("#main-menu");
 const button = header.querySelector(".site-header__menu-button");
 const icon = button.querySelector("path");
+const overPhoto = header.dataset.transparent === "true";
 
 // 8px so a light trackpad touch doesn't flicker the bar
 function updateHeader() {
-  header.dataset.transparent = scrollY < 8 && nav.dataset.open !== "true";
+  header.dataset.transparent = overPhoto && scrollY < 8 && nav.dataset.open !== "true";
 }
 
 function setOpen(open) {
