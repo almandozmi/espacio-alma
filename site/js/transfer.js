@@ -118,7 +118,7 @@ form.addEventListener("submit", async (event) => {
   error.remove();
   try {
     // A simple form POST needs no CORS preflight, which Apps Script can't answer
-    const response = await fetch(form.action, { method: "POST", body: new URLSearchParams(new FormData(form)) });
+    const response = await fetch(form.action, { method: "POST", body: new URLSearchParams(new FormData(form)), signal: AbortSignal.timeout(15000) });
     if (!(await response.json()).ok) throw new Error("Rejected");
     // Closed while sending: the next open must show a fresh form, not this result
     if (!dialog.open) return;
