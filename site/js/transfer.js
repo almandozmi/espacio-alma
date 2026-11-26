@@ -13,6 +13,8 @@ error.className = "transfer__error";
 error.setAttribute("role", "alert");
 error.textContent = "No pudimos enviar tus datos. Revisa tu conexión e inténtalo de nuevo.";
 let sending = false;
+// Each send remembers this count: a reply from before a close belongs to a dialog the visitor already left
+let closes = 0;
 
 // Our own messages replace the browser bubbles; novalidate also tells the CSS to show the form
 form.noValidate = true;
@@ -36,14 +38,20 @@ if (!hasInvokers) {
   }
 }
 
-// Plays the exit animation first; with reduced motion there is none and it closes at once
+// Waits for the exit animation of the box and its ::backdrop (effect.target is the dialog for both), not the fields inside
 function close() {
   if (!dialog.open || dialog.dataset.closing) return;
   dialog.dataset.closing = "true";
-  Promise.allSettled(dialog.getAnimations().map((animation) => animation.finished)).then(() => {
+  Promise.allSettled(dialog.getAnimations({ subtree: true }).filter((animation) => animation.effect.target === dialog).map((animation) => animation.finished)).then(() => {
     delete dialog.dataset.closing;
     dialog.close();
   });
+}
+
+function idle() {
+  sending = false;
+  submit.removeAttribute("aria-disabled");
+  submit.textContent = "Enviar";
 }
 
 function validate(input) {
@@ -90,6 +98,8 @@ dialog.addEventListener("pointerdown", (event) => (pressedOutside = outside(even
 dialog.addEventListener("pointerup", (event) => pressedOutside && outside(event) && close());
 
 dialog.addEventListener("close", () => {
+  closes++;
+  idle();
   form.reset();
   clearInvalid();
   for (const output of form.querySelectorAll(".field__message")) output.textContent = "";
@@ -114,6 +124,7 @@ form.addEventListener("submit", async (event) => {
   if (invalid.length) return invalid[0].focus();
 
   sending = true;
+  const opened = closes;
   submit.setAttribute("aria-disabled", "true");
   submit.textContent = "Enviando…";
   error.remove();
@@ -121,18 +132,15 @@ form.addEventListener("submit", async (event) => {
     // A simple form POST needs no CORS preflight, which Apps Script can't answer
     const response = await fetch(form.action, { method: "POST", body: new URLSearchParams(new FormData(form)), signal: AbortSignal.timeout(15000) });
     if (!(await response.json()).ok) throw new Error("Rejected");
-    // Closed while sending: the next open must show a fresh form, not this result
-    if (!dialog.open) return;
+    if (closes !== opened) return;
     const done = doneTemplate.content.firstElementChild.cloneNode(true);
     done.querySelector("button").addEventListener("click", close);
     form.replaceWith(done);
     // The submit button just disappeared; focus on the thanks so screen readers read it
     done.focus();
   } catch {
-    if (dialog.open) form.querySelector(".transfer__privacy").before(error);
+    if (closes === opened) form.querySelector(".transfer__privacy").before(error);
   } finally {
-    sending = false;
-    submit.removeAttribute("aria-disabled");
-    submit.textContent = "Enviar";
+    if (closes === opened) idle();
   }
 });
