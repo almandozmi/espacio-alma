@@ -38,11 +38,11 @@ if (!hasInvokers) {
   }
 }
 
-// Plays the exit animation first; with reduced motion there is none and it closes at once
+// Waits for the exit animation of the box and its ::backdrop (effect.target is the dialog for both), not the fields inside
 function close() {
   if (!dialog.open || dialog.dataset.closing) return;
   dialog.dataset.closing = "true";
-  Promise.allSettled(dialog.getAnimations().map((animation) => animation.finished)).then(() => {
+  Promise.allSettled(dialog.getAnimations({ subtree: true }).filter((animation) => animation.effect.target === dialog).map((animation) => animation.finished)).then(() => {
     delete dialog.dataset.closing;
     dialog.close();
   });

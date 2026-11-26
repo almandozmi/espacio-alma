@@ -34,35 +34,45 @@ html:has(.transfer[open]) {
     background: rgb(0 0 0 / 0.7);
   }
 
+  /* The box fades in with a small zoom; the backdrop only fades, with the same timing so both end together */
   &[open] {
-    animation: transfer-in 380ms cubic-bezier(0.23, 1, 0.32, 1);
+    animation: transfer-zoom-in 250ms ease-out;
+
+    /* Reduced motion keeps the fade and drops the zoom */
+    @media (prefers-reduced-motion: reduce) {
+      animation-name: transfer-fade-in;
+    }
   }
 
   &[open]::backdrop {
-    animation: transfer-fade-in 320ms ease-out;
+    animation: transfer-fade-in 250ms ease-out;
   }
 
   /* transfer.js sets data-closing and waits for these to end before closing */
   &[data-closing] {
-    animation: transfer-out 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+    animation: transfer-zoom-out 180ms ease-in forwards;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation-name: transfer-fade-out;
+    }
   }
 
   &[data-closing]::backdrop {
-    animation: transfer-fade-out 220ms ease-in forwards;
+    animation: transfer-fade-out 180ms ease-in forwards;
   }
 }
 
-@keyframes transfer-in {
+@keyframes transfer-zoom-in {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.97);
+    scale: 0.95;
   }
 }
 
-@keyframes transfer-out {
+@keyframes transfer-zoom-out {
   to {
     opacity: 0;
-    transform: translateY(10px) scale(0.98);
+    scale: 0.95;
   }
 }
 
@@ -266,12 +276,5 @@ html:has(.transfer[open]) {
     .transfer &:not([aria-disabled="true"]):hover {
       background: var(--on-surface-hover);
     }
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .transfer[open],
-  .transfer[open]::backdrop {
-    animation: none;
   }
 }
