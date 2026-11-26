@@ -1,0 +1,132 @@
+/* Black Friday: shown by promo.js only inside its time window */
+:root {
+  --promo-height: 0px;
+
+  &:has(.promo:not([hidden])) {
+    --promo-height: 40px;
+  }
+}
+
+.promo {
+  overflow: hidden;
+  height: var(--promo-height);
+  background: var(--accent);
+  color: var(--on-accent);
+  text-shadow: none;
+}
+
+/* Two identical halves: sliding by exactly one half loops without a jump */
+.promo__track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  align-items: center;
+  animation: promo-slide 40s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+
+  & span {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding-inline: 32px;
+  }
+}
+
+@keyframes promo-slide {
+  to {
+    translate: -50% 0;
+  }
+}
+
+/* The strip sits above the bar inside the fixed header, so whatever clears the header clears it too */
+html {
+  scroll-padding-top: calc(var(--header-height) + var(--promo-height) + env(safe-area-inset-top, 0px));
+}
+
+.plan__badge {
+  flex-basis: 100%;
+  align-self: flex-start;
+
+  & span {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 999px;
+    /* A light streak sweeps across the black label */
+    background: linear-gradient(110deg, var(--on-surface) 40%, #5a5a5a 50%, var(--on-surface) 60%) 0 0 / 250% 100%;
+    color: var(--surface);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 0.35);
+    animation: badge-shine 2.4s ease-in-out infinite, badge-pulse 2.4s ease-in-out infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    flex-basis: auto;
+    align-self: center;
+    margin: -24px 0 20px;
+
+    & span {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+@keyframes badge-shine {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+
+@keyframes badge-pulse {
+  0%, 100% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.07;
+  }
+}
+
+/* "Valores" in the menu gets a small tag underneath, both centered on each other */
+.site-header__nav a:has(.nav-promo) {
+  text-align: center;
+}
+
+.nav-promo {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  opacity: 0.85;
+
+  @media (min-width: 768px) {
+    font-size: 0.6rem;
+  }
+}
+
+/* Without the subtitle the cards sit as close to the title as the text under "¿Quiénes somos?" */
+.subtitle--strong[hidden] + .plans {
+  margin-top: 20px;
+
+  @media (min-width: 768px) {
+    margin-top: 28px;
+  }
+}
