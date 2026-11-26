@@ -43,7 +43,7 @@ main > :first-child:not(.hero) {
 
   & img {
     width: auto;
-    height: 30px;
+    height: 36px;
   }
 }
 
@@ -56,8 +56,8 @@ main > :first-child:not(.hero) {
 .site-header__menu-button {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border: 0;
   border-radius: 999px;
   background: none;
@@ -186,6 +186,24 @@ main > :first-child:not(.hero) {
   .button--small {
     padding-inline: 22px;
     font-size: 0.8rem;
+  }
+}
+
+/* shortcut: fixed cut at 1280px wide and 768px tall, measured at the default text size, measure whether the links fit if larger text crowds them into the logo */
+@media (min-width: 1280px) and (min-height: 768px) {
+  .site-header__logo img {
+    height: 46px;
+  }
+
+  .site-header__nav a {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+
+  .button--small {
+    min-height: 48px;
+    padding-inline: 26px;
+    font-size: 0.9rem;
   }
 }
 
